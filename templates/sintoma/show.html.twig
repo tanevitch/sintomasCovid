@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sintoma{% endblock %}
+
+{% block body %}
+    <h1>Sintoma</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sintoma.id }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ sintoma.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('sintoma_index') }}">back to list</a>
+
+    <a href="{{ path('sintoma_edit', {'id': sintoma.id}) }}">edit</a>
+
+    {{ include('sintoma/_delete_form.html.twig') }}
+{% endblock %}

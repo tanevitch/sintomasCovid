@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sintoma{% endblock %}
+
+{% block body %}
+    <h1>Create new Sintoma</h1>
+
+    {{ include('sintoma/_form.html.twig') }}
+
+    <a href="{{ path('sintoma_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container  justify-content-between">
+    <a class="navbar-brand">Sintomas COVID-19</a>
+    <div>
+        <a href="{{ path('app_login') }}" class="btn btn-outline-primary my-2">Iniciar Sesión</a>
+        <a href="{{ path('registro') }}" class="btn btn-outline-primary my-2">Registrarse</a>
+    </div>
+    </div>
+</nav>
+<section>
+<div class="container my-5">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Fluid jumbotron</h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+  </div>
+</div>
+</div>
+</section>
+
+
+{% endblock %}

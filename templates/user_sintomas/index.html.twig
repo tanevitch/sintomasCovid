@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserSintomas index{% endblock %}
+
+{% block body %}
+    <h1>UserSintomas index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Descripcion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user_sintoma in user_sintomas %}
+            <tr>
+                <td>{{ user_sintoma.id }}</td>
+                <td>{{ user_sintoma.fecha ? user_sintoma.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ user_sintoma.descripcion }}</td>
+                <td>
+                    <a href="{{ path('user_sintomas_show', {'id': user_sintoma.id}) }}">show</a>
+                    <a href="{{ path('user_sintomas_edit', {'id': user_sintoma.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_sintomas_new') }}">Create new</a>
+{% endblock %}

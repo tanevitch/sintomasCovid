@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Hola, {{user.nombre}}</h1>
+    <div class="container d-flex"> 
+        {% for sintoma in sintomas %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{sintoma.descripcion}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{sintoma.id}}</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Editar</a>
+                </div>
+            </div>
+                
+                
+        {% else %}
+            No has registrado síntomas
+        {% endfor %}
+
+    </div>
+
+    <a href="{{ path('user_sintomas_new') }}">Create new</a>
+{% endblock %}
