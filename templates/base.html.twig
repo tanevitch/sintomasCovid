@@ -8,7 +8,10 @@
          {% endblock %}
     </head>
     <body>
-        {% block body %}
-        {% endblock %}
+        {% block nav %} {% endblock %}
+        <div class="container py-4">
+            {% block body %}
+            {% endblock %}
+        </div>
     </body>
 </html>

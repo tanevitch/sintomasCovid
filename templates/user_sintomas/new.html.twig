@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New UserSintomas{% endblock %}
+{% block title %}Covid-19 Sintomas{% endblock %}
 
+{% block nav %}
+    <nav class="navbar navbar-light bg-light">
+            <div class="container  justify-content-between">
+            <a class="navbar-brand">Sintomas COVID-19</a>
+            <div>
+                <a href="{{ path('app_logout') }}" class="btn btn-outline-primary my-2">Cerrar Sesion</a>
+            </div>
+            </div>
+    </nav>
+{% endblock %}
 {% block body %}
-    <h1>Create new UserSintomas</h1>
+
+    <h1>Nuevo sintoma</h1>
 
     {{ include('user_sintomas/_form.html.twig') }}
 
-    <a href="{{ path('dashboard') }}">back to list</a>
+    <a href="{{ path('dashboard') }}">Atras</a>
 {% endblock %}

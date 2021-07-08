@@ -8,9 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Sintoma;
 use App\Repository\SintomaRepository;
-use Clasecita;
-use Fi\Collections\Collection;
 
+use Clasecita;
 
 class DashboardController extends AbstractController
 {
@@ -23,14 +22,22 @@ class DashboardController extends AbstractController
     public function index(SintomaRepository $sintomas): Response
     {
         foreach ($this->getUser()->getUserSintomas() as $sintoma) {
-            array_push($this->arreglo_sintomas, 
-                        $sintomas->find($sintoma->getId())
-                    );
+            $clase = new Clasecita(
+                $this->getUser()->getNombre(),
+                $sintoma->getFecha(),
+                $sintomas->find($sintoma->getSintoma())->getDescripcion(),
+                $sintoma->getId()
+            );
+
+            if ($sintoma->getDescripcion() != null){
+                $clase->setDescripcion($sintoma->getDescripcion());
+            }
+            array_push($this->arreglo_sintomas, $clase);
         }
+
         return $this->render('dashboard/index.html.twig', [
             'sintomas' => $this->arreglo_sintomas,
-            'user' => $this->getUser(),
-            'sintomas_user' =>$this->getUser()->getUserSintomas(),
+            'nombre' => $this->getUser()->getNombre()
         ]);
     }
 

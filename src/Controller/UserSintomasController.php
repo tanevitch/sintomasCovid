@@ -15,15 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserSintomasController extends AbstractController
 {
-    /**
-     * @Route("/", name="user_sintomas_index", methods={"GET"})
-     */
-    public function index(UserSintomasRepository $userSintomasRepository): Response
-    {
-        return $this->render('user_sintomas/index.html.twig', [
-            'user_sintomas' => $userSintomasRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new", name="user_sintomas_new", methods={"GET","POST"})
@@ -50,16 +41,6 @@ class UserSintomasController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_sintomas_show", methods={"GET"})
-     */
-    public function show(UserSintomas $userSintoma): Response
-    {
-        return $this->render('user_sintomas/show.html.twig', [
-            'user_sintoma' => $userSintoma,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="user_sintomas_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UserSintomas $userSintoma): Response
@@ -70,7 +51,7 @@ class UserSintomasController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_sintomas_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('dashboard', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user_sintomas/edit.html.twig', [
@@ -90,6 +71,6 @@ class UserSintomasController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_sintomas_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('dashboard', [], Response::HTTP_SEE_OTHER);
     }
 }

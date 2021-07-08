@@ -1,26 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
-
-{% block body %}
-    <h1>Hola, {{user.nombre}}</h1>
-    <div class="container d-flex"> 
-        {% for sintoma in sintomas %}
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{sintoma.descripcion}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{sintoma.id}}</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Editar</a>
-                </div>
+{% block nav %}
+<nav class="navbar navbar-light bg-light">
+            <div class="container  justify-content-between">
+            <a class="navbar-brand">Sintomas COVID-19</a>
+            <div>
+                <a href="{{ path('app_logout') }}" class="btn btn-outline-primary my-2">Cerrar Sesion</a>
             </div>
-                
-                
-        {% else %}
-            No has registrado síntomas
-        {% endfor %}
+            </div>
+    </nav>
+{% endblock %}
+{% block body %}
+        <h1>Hola, {{nombre}}</h1> 
+        <div class="card-deck d-flex"> 
+            {% for sintoma in sintomas %}
+                <div class="card" style="width: 18rem; margin: 5px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{sintoma.nombre}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{sintoma.fecha}}</h6>
+                        <p class="card-text">{{sintoma.descripcion}}</p>
+                        
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+                            <a href="{{ path('user_sintomas_edit',  {'id': sintoma.id}) }}" class="btn btn-primary btn-sm ">Editar</a>
+                            
+                            {# ver como importarlo con el import#}
+                            <form method="post" action="{{ path('user_sintomas_delete', {'id': sintoma.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sintoma.id) }}">
+                                <button class="btn btn-primary btn-sm" style="margin-left:5px">Borrar</button>
+                            </form>    
+                        </div>
+                </div>       
+                    
+            {% else %}
+                No has registrado síntomas
+            {% endfor %}
 
-    </div>
+        </div>
 
-    <a href="{{ path('user_sintomas_new') }}">Create new</a>
+        <a href="{{ path('user_sintomas_new') }}" class="btn btn-outline-primary my-2">Agregar sintoma</a>
+        
+        
 {% endblock %}
