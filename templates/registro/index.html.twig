@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Registro{% endblock %}
-
+{% block nav %}
+    <nav class="navbar navbar-light bg-light">
+        <div class="container  justify-content-between">
+        <a class="navbar-brand">Sintomas COVID-19</a>
+        <div>
+            <a href="{{ path('app_login') }}" class="btn btn-outline-primary my-2">Iniciar Sesión</a>
+            <a href="{{ path('registro') }}" class="btn btn-outline-primary my-2">Registrarse</a>
+        </div>
+        </div>
+    </nav>
+{% endblock %}
 {% block body %}
 {{ form(formulario)}}
 {% endblock %}
