@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Sintoma{% endblock %}
-
+{% block title %}Nuevo Sintoma{% endblock %}
+{% block nav %}
+{{ include('navbar.html.twig') }}
+{% endblock %}
 {% block body %}
-    <h1>Create new Sintoma</h1>
+    <h1>Ingresar nuevo Sintoma</h1>
 
     {{ include('sintoma/_form.html.twig') }}
 
-    <a href="{{ path('sintoma_index') }}">back to list</a>
+    <a href="{{ path('sintoma_index') }}">Atras</a>
+    
 {% endblock %}

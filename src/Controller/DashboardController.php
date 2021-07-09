@@ -21,24 +21,30 @@ class DashboardController extends AbstractController
 
     public function index(SintomaRepository $sintomas): Response
     {
-        foreach ($this->getUser()->getUserSintomas() as $sintoma) {
-            $clase = new Clasecita(
-                $this->getUser()->getNombre(),
-                $sintoma->getFecha(),
-                $sintomas->find($sintoma->getSintoma())->getDescripcion(),
-                $sintoma->getId()
-            );
-
-            if ($sintoma->getDescripcion() != null){
-                $clase->setDescripcion($sintoma->getDescripcion());
+        if ($this->getUser()){
+            foreach ($this->getUser()->getUserSintomas() as $sintoma) {
+                $clase = new Clasecita(
+                    $this->getUser()->getNombre(),
+                    $sintoma->getFecha(),
+                    $sintomas->find($sintoma->getSintoma())->getDescripcion(),
+                    $sintoma->getId()
+                );
+    
+                if ($sintoma->getDescripcion() != null){
+                    $clase->setDescripcion($sintoma->getDescripcion());
+                }
+                array_push($this->arreglo_sintomas, $clase);
             }
-            array_push($this->arreglo_sintomas, $clase);
+    
+            return $this->render('dashboard/index.html.twig', [
+                'sintomas' => $this->arreglo_sintomas,
+                'nombre' => $this->getUser()->getNombre()
+            ]);
         }
-
-        return $this->render('dashboard/index.html.twig', [
-            'sintomas' => $this->arreglo_sintomas,
-            'nombre' => $this->getUser()->getNombre()
-        ]);
+        else{
+            return $this->redirectToRoute('app_login');
+        }
+        
     }
 
 }

@@ -1,0 +1,23 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="{{ path('dashboard') }}">Sintomas COVID-19</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if is_granted('ROLE_ADMIN') %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="align-items: center">
+            <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{path('sintoma_new')}}">Agregar Sintoma</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{path('sintoma_index')}}">Gestionar Sintomas</a>
+            </li>
+        </ul>
+        {% endif %}
+      <a href="{{ path('app_logout') }}" class="btn btn-outline-primary my-2">Cerrar Sesion</a>
+    </div>
+  </div>
+</nav>

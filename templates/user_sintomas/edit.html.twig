@@ -2,14 +2,7 @@
 
 {% block title %}Sintomas COVID-19{% endblock %}
 {% block nav %}
-    <nav class="navbar navbar-light bg-light">
-            <div class="container  justify-content-between">
-            <a class="navbar-brand">Sintomas COVID-19</a>
-            <div>
-                <a href="{{ path('app_logout') }}" class="btn btn-outline-primary my-2">Cerrar Sesion</a>
-            </div>
-            </div>
-    </nav>
+{{ include('navbar.html.twig') }}
 {% endblock %}
 {% block body %}
     <h1>Editar sintoma</h1>

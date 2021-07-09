@@ -49,16 +49,6 @@ class SintomaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sintoma_show", methods={"GET"})
-     */
-    public function show(Sintoma $sintoma): Response
-    {
-        return $this->render('sintoma/show.html.twig', [
-            'sintoma' => $sintoma,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="sintoma_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Sintoma $sintoma): Response
