@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+require '../vendor/autoload.php';
 
 use App\Entity\UserSintomas;
 use App\Form\UserSintomasType;
@@ -10,11 +11,61 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+use App\Repository\SintomaRepository;
+
+use Clasecita;
+
 /**
  * @Route("/user/sintomas")
  */
 class UserSintomasController extends AbstractController
 {
+    private $arreglo_sintomas = array();
+
+    /**
+     * @Route("/generate_pdf", name="generate_pdf")
+     */
+    public function generatePDF(SintomaRepository $sintomas)
+    {   
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        
+        foreach ($this->getUser()->getUserSintomas() as $sintoma) {
+            $clase = new Clasecita(
+                $this->getUser()->getNombre(),
+                $sintoma->getFecha(),
+                $sintomas->find($sintoma->getSintoma())->getDescripcion(),
+                $sintoma->getId()
+            );
+
+            if ($sintoma->getDescripcion() != null){
+                $clase->setDescripcion($sintoma->getDescripcion());
+            }
+            array_push($this->arreglo_sintomas, $clase);
+        }
+
+        $dompdf = new Dompdf();
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('user_sintomas/generate_pdf.html.twig', [
+            'sintomas' => $this->arreglo_sintomas,
+            'nombre' => $this->getUser()->getNombre(),
+            'fecha' => date('d/m/y')
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // Render the HTML as PDF
+        $dompdf->render();
+        ob_end_clean();
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+        
+    }
 
     /**
      * @Route("/new", name="user_sintomas_new", methods={"GET","POST"})

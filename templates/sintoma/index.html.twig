@@ -1,26 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sintoma index{% endblock %}
-
+{% block title %}Sintomas COVID-19{% endblock %}
+{% block nav %}
+{{ include('navbar.html.twig') }}
+{% endblock %}
 {% block body %}
-    <h1>Sintoma index</h1>
+    <h1>Sintomas registrados</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Descripcion</th>
-                <th>actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
         {% for sintoma in sintomas %}
-            <tr>
-                <td>{{ sintoma.id }}</td>
-                <td>{{ sintoma.descripcion }}</td>
-                <td>
-                    <a href="{{ path('sintoma_show', {'id': sintoma.id}) }}">show</a>
-                    <a href="{{ path('sintoma_edit', {'id': sintoma.id}) }}">edit</a>
+            <tr >
+                <td width="50%">{{ sintoma.descripcion }}</td>
+                <td class="d-flex ">
+                    <a class="btn btn-dark "  href="{{ path('sintoma_edit', {'id': sintoma.id}) }}">Editar</a>
+                    {# ver como importarlo con el import#}
+                    <form method="post" action="{{ path('sintoma_delete', {'id': sintoma.id}) }}" onsubmit="return confirm('¿Eliminar el sintoma {{sintoma.descripcion}} permanentemente?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sintoma.id) }}">
+                        <button class="btn btn-dark mx-3">Borrar</button>
+                    </form> 
                 </td>
             </tr>
         {% else %}
@@ -31,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('sintoma_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('sintoma_new') }}">Cargar Sintoma</a>
 {% endblock %}

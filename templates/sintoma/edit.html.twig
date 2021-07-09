@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Sintoma{% endblock %}
-
+{% block title %}Sintomas COVID-19{% endblock %}
+{% block nav %}
+{{ include('navbar.html.twig') }}
+{% endblock %}
 {% block body %}
-    <h1>Edit Sintoma</h1>
+    <h1>Editar Sintoma</h1>
 
     {{ include('sintoma/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('sintoma_index') }}">back to list</a>
-
-    {{ include('sintoma/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sintomas COVID-19</title>
+    </head>
+    <body>
+        <h2> Sintomas al {{fecha}}</h2>
+        <h4> Paciente: {{nombre}} </h4>
+        <table class="table" width="100%">
+        <thead>
+            <tr>
+                <td><b>Sintoma</b></td>
+                <td><b>Descripcion</b></td>
+                <td><b>Fecha</b></td>
+            </tr>
+        </thead>
+        <tbody >
+        {% for sintoma in sintomas %}
+            <tr>
+                <td>{{sintoma.nombre}}</td>
+                <td>{{sintoma.descripcion}}</td>
+                <td>{{sintoma.fecha}}</td>
+            </tr>
+        {% endfor %}
+        </tbody >
+        </table>
+    </body>
+</html>
