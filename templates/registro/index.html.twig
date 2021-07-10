@@ -4,7 +4,7 @@
 {% block nav %}
     <nav class="navbar navbar-light bg-light">
         <div class="container  justify-content-between">
-        <a class="navbar-brand">Sintomas COVID-19</a>
+        <a class="navbar-brand" href="{{ path('home')}}">Sintomas COVID-19</a>
         <div>
             <a href="{{ path('app_login') }}" class="btn btn-outline-primary my-2">Iniciar Sesión</a>
             <a href="{{ path('registro') }}" class="btn btn-outline-primary my-2">Registrarse</a>
@@ -13,5 +13,13 @@
     </nav>
 {% endblock %}
 {% block body %}
-{{ form(formulario)}}
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-6 rounded bg-light my-3 p-5">
+            <h2> Registrarse </h2>
+            {{ form(formulario)}}
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -20,9 +20,14 @@ class SintomaController extends AbstractController
      */
     public function index(SintomaRepository $sintomaRepository): Response
     {
-        return $this->render('sintoma/index.html.twig', [
-            'sintomas' => $sintomaRepository->findAll(),
-        ]);
+        if ($this->getUser()){
+            return $this->render('sintoma/index.html.twig', [
+                'sintomas' => $sintomaRepository->findAll(),
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('dashboard');
+        }
     }
 
     /**
